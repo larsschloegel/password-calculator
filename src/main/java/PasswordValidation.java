@@ -80,7 +80,7 @@ public class PasswordValidation {
         System.out.println(Arrays.toString(createMultiplePassword(2, 4)));
         int minCountOfDigitInPassword = 2;
         int minLengthOfPassword = 1;
-        //System.out.println(createOnePassword(3));
+        ///System.out.println(createOnePassword(3));
         //System.out.println(checkNumberInPassword("krishna64", 1));
     }
 }
