@@ -1,6 +1,8 @@
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import javax.print.DocFlavor;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PasswordValidationTest {
@@ -21,20 +23,17 @@ public class PasswordValidationTest {
 
 @ParameterizedTest
 @CsvSource({
-        "KeineNummer, 0, true",
         "KeineNummer, 1, false",
-        "Nummer1, 0, false",
         "Nummer1, 1, true",
-        "1und2, 0, false",
-        "1und2, 1, false",
+        "1und2, 1, true",
         "1und2, 2, true",
-
+        "1und2und3, 1, true",
 })
-    void checkNumberInPassword(String password, int minNumberinPassword, boolean expected){
-        //When
-        boolean actual = PasswordValidation.checkNumberInPassword(password, minNumberinPassword);
-        //Then
-        assertEquals(expected, actual);
-    }
+void checkNumberInPassword(String password, int minNumberinPassword, boolean expected){
+    //When
+    boolean actual = PasswordValidation.checkMinNumberInPassword(password, minNumberinPassword);
+    //Then
+    assertEquals(expected, actual);
+}
 
 }
