@@ -53,13 +53,43 @@ public class PasswordValidationTest {
     @CsvSource({
             "KeineNummer, true",
             "NUMMER, false",
-            "nummer, false",
+            "nummer, true",
     })
-    void checkLowerAndUpperCaseInPassword(String password, boolean expected){
+    void checkLowerCase(String password, boolean expected){
         //When
-        boolean actual = PasswordValidation.checkLowerAndUpperInPassword(password);
+        boolean actual = PasswordValidation.checkLowerCaseInPassword(password);
         //Then
         assertEquals(expected, actual);
     }
+    @ParameterizedTest
+    @CsvSource({
+            "KeineNummer, true",
+            "NUMMER, true",
+            "nummer, false",
+    })
+    void checkUpperCase(String password, boolean expected){
+        //When
+        boolean actual = PasswordValidation.checkUpperCaseInPassword(password);
+        //Then
+        assertEquals(expected, actual);
+    }
+    @ParameterizedTest
+    @CsvSource({
+            //Test lower and upper case
+            "1Test, 1, 5, true",
+            "1TEST, 1, 5, false",
+            "1test, 1, 5, false",
+
+    })
+    void checkAllRequirements(String password, int minNumberInPassword, int minLengthInPassword, boolean expected){
+        //When
+        boolean actual = PasswordValidation.checkAllRequirements(password, minNumberInPassword, minLengthInPassword);
+        //Then
+        assertEquals(expected, actual);
+    }
+
+
+
+
 
 }

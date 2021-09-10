@@ -26,16 +26,33 @@ public class PasswordValidation {
         return password.matches(".*\\d.*");
     }
 
-    public static boolean checkLowerAndUpperInPassword (String password){
+    public static boolean checkLowerCaseInPassword (String password){
         boolean hasLower=false;
-        boolean hasUpper= false;
-        char [] chars = password.toCharArray();
-        for(char c: chars){
-            if (Character.isLowerCase(c))  {hasLower = true;}
-            if (Character.isUpperCase(c)) {hasUpper = true;}
-            }
-        return hasLower==true && hasUpper==true;
+            char [] chars = password.toCharArray();
+            for(char c: chars){
+                if (Character.isLowerCase(c))  {hasLower = true;}
+                }
+            return hasLower;
         }
+
+    public static boolean checkUpperCaseInPassword (String password){
+            boolean hasUpper=false;
+            char [] chars = password.toCharArray();
+            for(char c: chars){
+                if (Character.isUpperCase(c))  {hasUpper = true;}
+            }
+            return hasUpper;
+        }
+
+    public static boolean checkAllRequirements (String password, int minNumberInPassword, int minLengthInPassword){
+            return  checkNumberInPassword(password) &&
+                    checkMinNumberInPassword(password,minNumberInPassword) &&
+                    checkLengthOfPassword(password, minLengthInPassword) &&
+                    checkLowerCaseInPassword(password) &&
+                    checkUpperCaseInPassword(password);
+        }
+
+
 
 
     public static void main(String[] args) {
